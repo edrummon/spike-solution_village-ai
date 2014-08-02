@@ -20,7 +20,9 @@ CVillage::~CVillage(void)
 
 bool CVillage::update(float fDelta)
 {
+#if _DEBUG
 	static int daysPast = 0;
+#endif
 	setTime(getTime() + fDelta);
 
 	while(getTime() > 1)

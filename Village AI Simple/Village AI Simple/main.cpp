@@ -5,7 +5,10 @@
 #include <windows.h>
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")
+
+#if _DEBUG
 using std::cout;
+#endif
 
 #define FAST_FOWARD 16
 
@@ -14,9 +17,11 @@ int main()
 	DWORD dwPrevTime = 0;
 	float fDeltaTime = 0;
 	
+#if _DEBUG
 	unsigned int frames = 0;
 	float time = 0;
 	int elapsedTime = 0;
+#endif
 
 	for(unsigned int i = 0; i < 1; ++i)
 		CObjectManager::getInstance().insertObject(new CVillage());
@@ -34,6 +39,7 @@ int main()
 
 		CObjectManager::getInstance().updateObjects(fDeltaTime * FAST_FOWARD);
 
+#if _DEBUG
 		time += fDeltaTime;
 		++frames;
 		if(time > 1)
@@ -46,7 +52,10 @@ int main()
 			frames = 0;
 			//Sleep(50);
 		}
+#endif
 	}
 
+	cout << '\n';
+	system("pause");
 	return 0;
 }
