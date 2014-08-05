@@ -22,7 +22,7 @@ public:
 	~CVillage(void);
 
 	bool update(float fDelta);
-	//CPerson* findPounder();
+	//CPerson* findPounder(CPerson* poundee);
 
 	inline void addFemaleVillager(CPerson* villager)		{ m_cFemaleVillagers.push_back(villager); }
 	inline void removeFemaleVillager(CPerson* villager)		{ m_cFemaleVillagers.remove(villager); }
