@@ -10,7 +10,10 @@ CVillage::CVillage(void) : m_nFood(250), m_fTime(0)
 {
 	for(int i = 0; i < s_nStartingVillagers; ++i)
 	{
-		m_cVillagers.push_back(new CPerson(this, 17));
+		if(0 == rand() % 2)
+			m_cFemaleVillagers.push_back(new CPerson(this, 17, true));
+		else
+			m_cMaleVillagers.push_back(new CPerson(this, 17, false));
 	}
 }
 
@@ -30,26 +33,54 @@ bool CVillage::update(float fDelta)
 #if _DEBUG
 		cout << "-----------------------------------" << '\n';
 		cout << "Days Past: " << ++daysPast << '\n';
-		cout << "Villagers: " << m_cVillagers.size() << '\n';
+		cout << "Villagers: " << getVillageSize() << '\n';
 #endif
 
+		bool loopFemale = true;
 		setTime(getTime() - 1);
 		setFood(250);
-		for(list<CPerson*>::iterator iter = m_cVillagers.begin(); iter != m_cVillagers.end();)
+		for (auto femaleIter = m_cFemaleVillagers.begin(), maleIter = m_cMaleVillagers.begin();
+			femaleIter != m_cFemaleVillagers.end() || maleIter != m_cMaleVillagers.end();)
 		{
-			if(false == (*iter)->update(fDelta))
+			if (loopFemale && femaleIter != m_cFemaleVillagers.end())
 			{
+				if (false == (*femaleIter)->update(fDelta))
+				{
 #if _DEBUG
-				cout << '\n';
-				cout << "Age:\t\t" << (*iter)->getAge() << '\n';
-				cout << "Death Age:\t" << (*iter)->getDeathAge() << '\n';
-				cout << "Is Female:\t" << (*iter)->isFemale() << '\n';
+					cout << '\n';
+					cout << "Age:\t\t" << (*femaleIter)->getAge() << '\n';
+					cout << "Death Age:\t" << (*femaleIter)->getDeathAge() << '\n';
+					cout << "Is Female:\t" << "true" << '\n';
 #endif
-				delete *iter;
-				m_cVillagers.erase(iter++);
+					delete *femaleIter;
+					m_cFemaleVillagers.erase(femaleIter++);
+				}
+				else
+					++femaleIter;
+				loopFemale = false;
 			}
 			else
-				++iter;
+			{
+				if (maleIter == m_cMaleVillagers.end())
+				{
+					loopFemale = true;
+					continue;
+				}
+				if (false == (*maleIter)->update(fDelta))
+				{
+#if _DEBUG
+					cout << '\n';
+					cout << "Age:\t\t" << (*maleIter)->getAge() << '\n';
+					cout << "Death Age:\t" << (*maleIter)->getDeathAge() << '\n';
+					cout << "Is Female:\t" << "false" << '\n';
+#endif
+					delete *maleIter;
+					m_cMaleVillagers.erase(maleIter++);
+				}
+				else
+					++maleIter;
+				loopFemale = true;
+			}
 		}
 
 #if _DEBUG
@@ -57,7 +88,7 @@ bool CVillage::update(float fDelta)
 #endif
 	}
 
-	if(0 == m_cVillagers.size())
+	if(0 == getVillageSize())
 		return false;
 
 	return true;

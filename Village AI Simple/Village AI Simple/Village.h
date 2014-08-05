@@ -11,7 +11,8 @@ private:
 	int m_nFood;
 
 protected:
-	list<CPerson*> m_cVillagers;
+	list<CPerson*> m_cFemaleVillagers;
+	list<CPerson*> m_cMaleVillagers;
 
 	static const int s_nStartingVillagers = 24;
 	float m_fTime;
@@ -21,13 +22,19 @@ public:
 	~CVillage(void);
 
 	bool update(float fDelta);
+	//CPerson* findPounder();
 
-	inline void addVillager(CPerson* villager)		{ m_cVillagers.push_back(villager); }
-	inline void removeVillager(CPerson* villager)	{ m_cVillagers.remove(villager); }
+	inline void addFemaleVillager(CPerson* villager)		{ m_cFemaleVillagers.push_back(villager); }
+	inline void removeFemaleVillager(CPerson* villager)		{ m_cFemaleVillagers.remove(villager); }
 
-	inline void setFood(int nFood)					{ m_nFood = nFood; if(m_nFood < 0) m_nFood = 0; }
-	inline int getFood()							{ return m_nFood; }
+	inline void addMaleVillager(CPerson* villager)			{ m_cMaleVillagers.push_back(villager); }
+	inline void removeMaleVillager(CPerson* villager)		{ m_cMaleVillagers.remove(villager); }
 
-	inline void setTime(float fNewTime)				{ m_fTime = fNewTime; }
-	inline float getTime()							{ return m_fTime; }
+	inline void setFood(int nFood)							{ m_nFood = nFood; if(m_nFood < 0) m_nFood = 0; }
+	inline const int getFood() const						{ return m_nFood; }
+
+	inline void setTime(float fNewTime)						{ m_fTime = fNewTime; }
+	inline const float getTime() const						{ return m_fTime; }
+
+	inline const size_t getVillageSize() const				{ return m_cFemaleVillagers.size() + m_cMaleVillagers.size(); }
 };

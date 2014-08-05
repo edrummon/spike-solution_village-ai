@@ -4,15 +4,15 @@
 #include <time.h>
 #include <cstdlib>
 
-CPerson::CPerson(CVillage* pVillage, int nAge) : m_pVillage(pVillage), m_nAge(nAge), m_nLastAge(m_nAge), m_nHunger(0), m_nDaysPast(0),
-										m_bFemale(static_cast<bool>(rand() % 2)), m_nBirthingAge(0), m_nMenopauseAge(0), m_nNumChildren(0), m_nMaxChildren(0)
+CPerson::CPerson(CVillage* pVillage, int nAge, bool isFemale) : m_pVillage(pVillage), m_nAge(nAge), m_nLastAge(m_nAge), m_nHunger(0), m_nDaysPast(0),
+										m_bFemale(isFemale), m_nBirthingAge(0), m_nMenopauseAge(0), m_nNumChildren(0), m_nMaxChildren(0)
 {
-	if(false == rand() % 10)
+	if(0 == rand() % 10)
 		setDeathAge(rand() % 35);
 	else
 		setDeathAge(rand() % 100 + 17);
 
-	if(m_bFemale)
+	if(isFemale)
 	{
 		setBirthingAge(rand() % 6 + 13);
 		setMenopauseAge(rand() % 10 + 40);
@@ -60,7 +60,11 @@ bool CPerson::update(float fDelta)
 		{
 			if(rand() % 10 < 3)
 			{
-				m_pVillage->addVillager(new CPerson(m_pVillage, 0));
+				if(0 == rand() % 2)
+					m_pVillage->addMaleVillager(new CPerson(m_pVillage, 0, false));
+				else
+					m_pVillage->addFemaleVillager(new CPerson(m_pVillage, 0, true));
+				
 				setNumChildren(getNumChildren() + 1);
 			}
 		}

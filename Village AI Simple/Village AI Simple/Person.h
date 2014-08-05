@@ -21,7 +21,7 @@ private:
 	bool m_bFemale;
 
 public:
-	CPerson(CVillage* pVillage, int nAge);
+	CPerson(CVillage* pVillage, int nAge, bool isFemale);
 	~CPerson(void);
 
 	bool update(float fDelta);
@@ -29,27 +29,27 @@ public:
 	////////////////////////////
 	// Accessors
 	////////////////////////////
-	inline int getDaysPast()							{ return m_nDaysPast; }
-	inline int getLastAge()								{ return m_nLastAge; }
-	inline int getAge()									{ return m_nAge; }
-	inline int getHunger()								{ return m_nHunger; }
-	inline int getDeathAge()							{ return m_nDeathAge; }
-	inline int getBirthingAge()							{ return m_nBirthingAge; }
-	inline int getMenopauseAge()						{ return m_nMenopauseAge; }
-	inline int getNumChildren()							{ return m_nNumChildren; }
-	inline int getMaxChildren()							{ return m_nMaxChildren; }
-	inline bool isFemale()								{ return m_bFemale; }
+	inline const int getDaysPast() const							{ return m_nDaysPast; }
+	inline const int getLastAge() const								{ return m_nLastAge; }
+	inline const int getAge() const									{ return m_nAge; }
+	inline const int getHunger() const								{ return m_nHunger; }
+	inline const int getDeathAge() const							{ return m_nDeathAge; }
+	inline const int getBirthingAge() const							{ return m_nBirthingAge; }
+	inline const int getMenopauseAge() const						{ return m_nMenopauseAge; }
+	inline const int getNumChildren() const							{ return m_nNumChildren; }
+	inline const int getMaxChildren() const							{ return m_nMaxChildren; }
+	inline const bool isFemale() const								{ return m_bFemale; }
 
 	////////////////////////////
 	// Mutators
 	////////////////////////////
-	inline void setDaysPast(int nNewDaysPast)			{ m_nDaysPast = nNewDaysPast; }
-	inline void setLastAge(int nNewLastAge)				{ m_nLastAge = nNewLastAge; }
-	inline void setAge(int nNewAge)						{ m_nAge = nNewAge; }
-	inline void setHunger(int nNewHunger)				{ m_nHunger = nNewHunger; }
-	inline void setDeathAge(int nNewDeathAge)			{ m_nDeathAge = nNewDeathAge; }
-	inline void setBirthingAge(int nNewBirthingAge)		{ m_nBirthingAge = nNewBirthingAge; }
-	inline void setMenopauseAge(int nNewMenopauseAge)	{ m_nMenopauseAge = nNewMenopauseAge; }
-	inline void setNumChildren(int nNewNumChildren)		{ m_nNumChildren = nNewNumChildren; }
-	inline void setMaxChildren(int nNewMaxChildren)		{ m_nMaxChildren = nNewMaxChildren; }
+	inline void setDaysPast(int nNewDaysPast)						{ m_nDaysPast = nNewDaysPast; }
+	inline void setLastAge(int nNewLastAge)							{ m_nLastAge = nNewLastAge; }
+	inline void setAge(int nNewAge)									{ m_nAge = nNewAge; }
+	inline void setHunger(int nNewHunger)							{ m_nHunger = nNewHunger; }
+	inline void setDeathAge(int nNewDeathAge)						{ m_nDeathAge = nNewDeathAge; }
+	inline void setBirthingAge(int nNewBirthingAge)					{ m_nBirthingAge = nNewBirthingAge; }
+	inline void setMenopauseAge(int nNewMenopauseAge)				{ m_nMenopauseAge = nNewMenopauseAge; }
+	inline void setNumChildren(int nNewNumChildren)					{ m_nNumChildren = nNewNumChildren; }
+	inline void setMaxChildren(int nNewMaxChildren)					{ m_nMaxChildren = nNewMaxChildren; }
 };
