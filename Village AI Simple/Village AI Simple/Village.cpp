@@ -39,12 +39,12 @@ bool CVillage::update(float fDelta)
 		bool loopFemale = true;
 		setTime(getTime() - 1);
 		setFood(250);
-		for (auto femaleIter = m_cFemaleVillagers.begin(), maleIter = m_cMaleVillagers.begin();
+		for(auto femaleIter = m_cFemaleVillagers.begin(), maleIter = m_cMaleVillagers.begin();
 			femaleIter != m_cFemaleVillagers.end() || maleIter != m_cMaleVillagers.end();)
 		{
-			if (loopFemale && femaleIter != m_cFemaleVillagers.end())
+			if(loopFemale && femaleIter != m_cFemaleVillagers.end())
 			{
-				if (false == (*femaleIter)->update(fDelta))
+				if(false == (*femaleIter)->update(fDelta))
 				{
 #if _DEBUG
 					cout << '\n';
@@ -61,12 +61,12 @@ bool CVillage::update(float fDelta)
 			}
 			else
 			{
-				if (maleIter == m_cMaleVillagers.end())
+				if(maleIter == m_cMaleVillagers.end())
 				{
 					loopFemale = true;
 					continue;
 				}
-				if (false == (*maleIter)->update(fDelta))
+				if(false == (*maleIter)->update(fDelta))
 				{
 #if _DEBUG
 					cout << '\n';
